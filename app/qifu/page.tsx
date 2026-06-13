@@ -17,12 +17,12 @@ export default function PrayerPage() {
         <section className="incense-glow border-b border-border px-4 py-16 md:py-20">
           <PageHeader
             kicker="为家人祈福"
-            title="点一盏心灯"
-            description="挂家人之名，许一份心愿。一念慈悲，一灯长明，愿所念之人皆得安康顺遂。"
+            title="为家人祈福"
+            description="点一盏灯，挂家人之名，愿心愿成就，福寿安康。"
           />
         </section>
         <section className="px-4 py-12 md:py-16">
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-3xl">
             <PrayerWall />
           </div>
         </section>

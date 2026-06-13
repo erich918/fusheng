@@ -16,27 +16,24 @@ export default function BaziPage() {
       <main className="flex-1">
         <section className="incense-glow border-b border-border px-4 py-16 md:py-20">
           <PageHeader
-            kicker="八字精批"
-            title="排盘批命"
-            description="以《渊海子平》为据，依你的生辰八字推演命理，点明当下运势、性格特点与近期吉凶。"
+            kicker="传家技艺"
+            title="八字精批"
+            description="输入生辰，洞悉天命，先看命盘，再看流年。"
           />
         </section>
         <section className="px-4 py-12 md:py-16">
           <OracleForm
             type="bazi"
-            submitLabel="请师父批命"
+            submitLabel="请师父排盘"
             fields={[
-              { kind: "text", name: "year", label: "出生年份", placeholder: "如：1995" },
-              { kind: "text", name: "month", label: "出生月份", placeholder: "如：8" },
-              { kind: "text", name: "day", label: "出生日期", placeholder: "如：15" },
-              { kind: "text", name: "hour", label: "出生时辰", placeholder: "如：午时 / 12", optional: true },
+              { kind: "birth", name: "birth", label: "生辰" },
               {
                 kind: "select",
                 name: "gender",
                 label: "性别",
                 options: [
-                  { value: "male", label: "男命" },
-                  { value: "female", label: "女命" },
+                  { value: "male", label: "男" },
+                  { value: "female", label: "女" },
                 ],
               },
             ]}

@@ -1,60 +1,79 @@
 "use client"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { Flame } from "lucide-react"
-import { PrayerForm } from "./prayer-form"
+import { PrayerForm, type PrayerEntry } from "./prayer-form"
 
 type Lamp = {
   id: number
-  name: string
-  wish: string
+  surname: string
+  donor: string
 }
 
-const seedLamps: Lamp[] = [
-  { id: 1, name: "母亲", wish: "愿身体安康，岁岁平安" },
-  { id: 2, name: "全家", wish: "阖家顺遂，福寿绵长" },
-  { id: 3, name: "孩儿", wish: "学业有成，金榜题名" },
-  { id: 4, name: "爱人", wish: "情深意笃，白首不离" },
-  { id: 5, name: "自己", wish: "心宽体健，万事胜意" },
-  { id: 6, name: "父亲", wish: "福如东海，寿比南山" },
-  { id: 7, name: "挚友", wish: "前程似锦，所求皆得" },
-  { id: 8, name: "众生", wish: "离苦得乐，善缘常伴" },
-]
+const SURNAMES = "何童孙赵刘腾王段郭朱周小程苑杜黄鹏付董李高".split("")
+
+function buildSeed(): Lamp[] {
+  return Array.from({ length: 30 }, (_, i) => ({
+    id: i,
+    surname: SURNAMES[i % SURNAMES.length],
+    donor: "善",
+  }))
+}
 
 export function PrayerWall() {
-  const [lamps, setLamps] = useState<Lamp[]>(seedLamps)
+  const seed = useMemo(buildSeed, [])
+  const [lamps, setLamps] = useState<Lamp[]>(seed)
+  const [total, setTotal] = useState(0)
+  const [today, setToday] = useState(0)
+
+  function handleOffered(entry: PrayerEntry) {
+    setLamps((prev) => [
+      {
+        id: Date.now(),
+        surname: entry.name.slice(0, 1) || "善",
+        donor: entry.donor.slice(0, 1) || "善",
+      },
+      ...prev,
+    ])
+    setTotal((n) => n + 1)
+    setToday((n) => n + 1)
+  }
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[minmax(0,420px)_1fr]">
-      <div className="lg:sticky lg:top-24 lg:self-start">
-        <PrayerForm
-          onOffered={(entry) =>
-            setLamps((prev) => [
-              { id: Date.now(), name: entry.name, wish: entry.wish },
-              ...prev,
-            ])
-          }
-        />
+    <div className="space-y-10">
+      <div className="text-center">
+        <div className="mx-auto inline-flex items-center gap-6 rounded-full border border-border bg-card/50 px-6 py-2.5 text-sm text-muted-foreground">
+          <span>
+            {"已点亮 "}
+            <span className="font-heading text-lg text-gold">{total}</span>
+            {" 盏"}
+          </span>
+          <span>
+            {"今日新增 "}
+            <span className="font-heading text-lg text-cinnabar">{today}</span>
+            {" 盏"}
+          </span>
+        </div>
       </div>
 
-      <div>
-        <div className="mb-6 flex items-baseline justify-between">
-          <h2 className="font-heading text-xl text-gold">{"祈福灯墙"}</h2>
-          <span className="text-xs text-muted-foreground">{`已点亮 ${lamps.length} 盏心灯`}</span>
-        </div>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
+      <PrayerForm onOffered={handleOffered} />
+
+      <div className="rounded-2xl border border-border bg-card/60 p-6 md:p-8">
+        <h2 className="font-heading text-2xl text-gold">{"功德灯墙"}</h2>
+        <p className="mt-1 text-sm text-muted-foreground">{"姓名已脱敏处理 · 心诚则灵"}</p>
+        <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {lamps.map((lamp) => (
             <li
               key={lamp.id}
-              className="group flex flex-col items-center gap-3 rounded-xl border border-border bg-card/50 p-5 text-center transition-colors hover:border-gold/50"
+              className="group flex flex-col items-center gap-2 rounded-xl border border-border bg-background/40 p-4 text-center transition-colors hover:border-gold/50"
             >
-              <span className="relative">
-                <span className="absolute -inset-3 rounded-full bg-gold/15 blur-lg transition-opacity group-hover:opacity-100" aria-hidden />
-                <Flame className="relative h-8 w-8 text-gold animate-flame" strokeWidth={1.5} />
+              <Flame className="h-7 w-7 text-gold animate-flame" strokeWidth={1.5} />
+              <span className="font-heading text-xl text-foreground">
+                {lamp.surname}
+                <span className="text-muted-foreground">*</span>
               </span>
-              <span className="font-heading text-base text-foreground">{lamp.name}</span>
-              <span className="text-xs leading-relaxed text-muted-foreground text-pretty">
-                {lamp.wish}
+              <span className="text-[11px] text-muted-foreground">
+                {`${lamp.donor}** 为 ${lamp.surname}** 敬奉`}
               </span>
             </li>
           ))}

@@ -16,9 +16,9 @@ export default function HuangliPage() {
       <main className="flex-1">
         <section className="incense-glow border-b border-border px-4 py-16 md:py-20">
           <PageHeader
-            kicker="今日黄历"
-            title="择吉而行"
-            description="干支纪日，宜忌分明。循古法察时辰方位，知所宜所忌，顺势而为，事半功倍。"
+            kicker="每日打卡"
+            title="今日黄历"
+            description="干支宜忌、神煞冲煞、十二时辰，传统择吉一目了然。"
           />
         </section>
         <section className="px-4 py-12 md:py-16">

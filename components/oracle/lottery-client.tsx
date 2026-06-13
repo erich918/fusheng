@@ -40,16 +40,19 @@ export function LotteryClient() {
     <div className="mx-auto max-w-2xl space-y-8">
       <MasterPicker value={master} onChange={setMaster} />
 
+      <div className="rounded-full border border-gold/40 bg-gold/5 px-4 py-2 text-center text-sm text-gold">
+        {"今日免费 1/1"}
+      </div>
+
       <div className="space-y-2">
         <label htmlFor="q" className="text-sm font-medium text-foreground">
-          {"心中所问"}
-          <span className="ml-1 text-xs text-muted-foreground">{"（选填）"}</span>
+          {"写下您要问的事，心诚则灵"}
         </label>
         <input
           id="q"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          placeholder="如：近期事业是否顺遂？"
+          placeholder="默念所求 · 求一支签"
           className="w-full rounded-lg border border-input bg-background/60 px-4 py-3 text-sm text-foreground outline-none ring-ring/50 placeholder:text-muted-foreground focus:ring-2"
         />
       </div>

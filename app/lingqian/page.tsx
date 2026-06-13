@@ -16,9 +16,9 @@ export default function LotteryPage() {
       <main className="flex-1">
         <section className="incense-glow border-b border-border px-4 py-16 md:py-20">
           <PageHeader
-            kicker="关帝灵签"
-            title="求一支灵签"
-            description="静心默念所求之事，诚心求得一签，由师父为你解签开示。心诚则灵，签为引，行在己。"
+            kicker="传统签谱 · 关帝灵签"
+            title="关帝灵签"
+            description="心诚则灵 · 默念所求 · 抽一支签。100 支签文出自传统签谱，一签一事。"
           />
         </section>
         <section className="px-4 py-12 md:py-16">

@@ -2,11 +2,11 @@ import type { Metadata } from "next"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
-import { OracleForm } from "@/components/oracle/oracle-form"
+import { DreamClient } from "@/components/dream/dream-client"
 
 export const metadata: Metadata = {
   title: "周公解梦 · 析梦明心 | 菩提苑",
-  description: "夜来一梦，吉凶难辨，师父为你析其深意。",
+  description: "百梦皆有意，古今相参证。80 余条经典梦境，直接告诉您吉凶。",
 }
 
 export default function DreamPage() {
@@ -16,24 +16,13 @@ export default function DreamPage() {
       <main className="flex-1">
         <section className="incense-glow border-b border-border px-4 py-16 md:py-20">
           <PageHeader
-            kicker="周公解梦"
-            title="析梦明心"
-            description="梦由心生，亦由境起。写下你的梦境，师父为你分析吉凶征兆与深层心理含义。"
+            kicker="新增 · 周公解梦"
+            title="周公解梦"
+            description="百梦皆有意 · 古今相参证。写下梦境由师父开示，或按类查阅经典梦境吉凶。"
           />
         </section>
         <section className="px-4 py-12 md:py-16">
-          <OracleForm
-            type="dream"
-            submitLabel="请师父解梦"
-            fields={[
-              {
-                kind: "textarea",
-                name: "dream",
-                label: "梦境描述",
-                placeholder: "请尽量详细地描述你昨夜或近日的梦境…",
-              },
-            ]}
-          />
+          <DreamClient />
         </section>
       </main>
       <SiteFooter />
